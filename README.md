@@ -72,3 +72,83 @@ $ rostopic echo /turtle1/pose
 - linear_velocity: 현재 직진 속도. 방향키 위,아래 를 누르면 2.0이 된다.
 - angular_velocity: 현재 회전 속도. 방향키 좌를 누르면 2.0이 된다, 아래를 누르면 -2.0이 된다.
 ```
+
+# 과제 3 - 토픽/메시지 구조 정리
+
+```bash
+#1 . 토픽 목록 확인
+
+$ rostopic list
+
+/rosout
+/rosout_agg
+/turtle1/cmd_vel
+/turtle1/color_sensor
+/turtle1/pose
+```
+
+```bash
+# 2. 토픽의 메시지 타입 확인
+
+$ rostopic type /turtle1/cmd_vel
+
+geometry_msgs/Twist
+```
+
+```bash
+# 3. 토픽의 메시지 구조 확인
+
+$ rosmsg show geometry_msgs/Twist
+
+geometry_msgs/Vector3 linear
+  float64 x
+  float64 y
+  float64 z
+geometry_msgs/Vector3 angular
+  float64 x
+  float64 y
+  float64 z
+```
+
+## turtlesim 토픽 정리
+
+
+### 1. /turtle1/cmd_vel (geometry_msgs/Twist)
+
+거북이에게 보내는 속도 명령
+
+- linear.x: 직진 속도 (앞/뒤)
+
+- linear.y: 좌/우 이동 (사용 안 함)
+
+- linear.z: 상/하 이동 (사용 안 함)
+
+- angular.x: Roll (사용 안 함)
+
+- angular.y: Pitch (사용 안 함)
+
+- angular.z: 회전 속도 (좌/우 회전)
+
+### 2. /turtle1/pose (turtlesim/Pose)
+
+거북이의 현재 위치와 방향
+
+- x: X 좌표
+
+- y: Y 좌표
+
+- theta: 방향 (라디안)
+
+- linear_velocity: 현재 직진 속도
+
+- angular_velocity: 현재 회전 속도
+
+### 3. /turtle1/color_sensor (turtlesim/Color)
+
+거북이 발 아래의 배경 색상
+
+- r: 빨강 (0~255)
+
+- g: 초록 (0~255)
+
+- b: 파랑 (0~255)
