@@ -52,4 +52,23 @@ $ source ~/.bashrc
 
 #확인 : nano ~/.bashrc
 ```
-#### docs : ROS Noetic 설치 과정 문서화
+
+# 과제 2 - /turtle1/pose 관찰
+
+```bash
+#준비
+터미널1 : roscore
+터미널2 : rosnode list 확인 후 > rosrun turtlesim turtlesim_node
+터미널3 : rosrun turtlesim turtle_teleop_key
+```
+
+```bash
+# /turtle1/pose 필드 분석
+$ rostopic echo /turtle1/pose
+
+- x: 거북이의 X 좌표. 우측으로 이동하면 값이 증가한다
+- y: 거북이의 Y 좌표. 위로 이동하면 값이 증가한다
+- theta: 거북이의 방향 (라디안). 좌회전하면 값이 증가, 우회전하면 감소한다
+- linear_velocity: 현재 직진 속도. 방향키 위,아래 를 누르면 2.0이 된다.
+- angular_velocity: 현재 회전 속도. 방향키 좌를 누르면 2.0이 된다, 아래를 누르면 -2.0이 된다.
+```
