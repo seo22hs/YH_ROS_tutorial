@@ -152,3 +152,37 @@ geometry_msgs/Vector3 angular
 - g: 초록 (0~255)
 
 - b: 파랑 (0~255)
+
+
+# 과제 4 - rostopic pub으로 정사각형 그리기
+
+```bash
+1. turtlesim 실행
+(roscore, turtlesim_node가 이미 실행 중이어야 함)
+
+2. 직진
+$ rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist \-- '[2.0, 0.0, 0.0]' '[0.0, 0.0, 0.0]'
+
+3. 회전
+$ rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist \-- '[2.0, 0.0, 0.0]' '[0.0, 0.0, 0.0]'
+```
+
+
+## Debug
+```bash
+1. 노드 소통값 확인
+$ rosrun rqt_graph rqt_graph
+
+2. xyz값 확인
+$ rostopic echo /turtle1/cmd_vel
+$ rosmsg show geometry_msgs/Twist
+
+3. hz 확인
+$ rostopic hz /turtle1/pose
+
+4. 그래프로 확인
+$ rosrun rqt_plot rqt_plot
+
+5. 입력값대로 움직임
+$ rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, 1.8]'
+```
