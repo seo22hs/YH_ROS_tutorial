@@ -2,7 +2,9 @@
     Ubuntu 20.04
     Ros noetic
 
-# ROS install
+# DAY 1
+
+## ROS install
 1. souce list
 ```bash
 $ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
@@ -53,7 +55,7 @@ $ source ~/.bashrc
 #확인 : nano ~/.bashrc
 ```
 
-# 과제 2 - /turtle1/pose 관찰
+## 과제 2 - /turtle1/pose 관찰
 
 ```bash
 #준비
@@ -73,7 +75,7 @@ $ rostopic echo /turtle1/pose
 - angular_velocity: 현재 회전 속도. 방향키 좌를 누르면 2.0이 된다, 아래를 누르면 -2.0이 된다.
 ```
 
-# 과제 3 - 토픽/메시지 구조 정리
+## 과제 3 - 토픽/메시지 구조 정리
 
 ```bash
 #1 . 토픽 목록 확인
@@ -154,7 +156,7 @@ geometry_msgs/Vector3 angular
 - b: 파랑 (0~255)
 
 
-# 과제 4 - rostopic pub으로 정사각형 그리기
+## 과제 4 - rostopic pub으로 정사각형 그리기
 
 ```bash
 1. turtlesim 실행
@@ -186,3 +188,87 @@ $ rosrun rqt_plot rqt_plot
 5. 입력값대로 움직임
 $ rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, 1.8]'
 ```
+# DAY2
+
+## rqt_console & roslauch
+
+```bash
+#패키지 설치
+
+$ sudo apt-get install ros-noetic-rqt ros-noetic-rqt-common-plugins ros-noetic-turtlesim
+
+#디버깅
+
+$ rosrun rqt_console rqt_console
+
+- 노드 로거 레벨 선택 : $ rosrun rqt_logger_level rqt_logger_level
+
+
+#예시
+- 실행
+$ rosrun turtlesim turtlesim_node
+$ rostopic pub /turtle1/cmd_vel geometry_msgs/Twist -r 1 -- '{linear: {x: 2.0, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'
+
+#*roslaunch*
+$ roscd beginner_tutorials
+$ mkdir launch
+$ cd launch -> turtlemimic.launch 런치 파일 생성 후 아래 코드 붙혀넣기
+   1 <launch>
+   2 
+   3   <group ns="turtlesim1">
+   4     <node pkg="turtlesim" name="sim" type="turtlesim_node"/>
+   5   </group>
+   6 
+   7   <group ns="turtlesim2">
+   8     <node pkg="turtlesim" name="sim" type="turtlesim_node"/>
+   9   </group>
+  10 
+  11   <node pkg="turtlesim" name="mimic" type="mimic">
+  12     <remap from="input" to="turtlesim1/turtle1"/>
+  13     <remap from="output" to="turtlesim2/turtle1"/>
+  14   </node>
+  15 
+  16 </launch>
+
+
+#예시
+- 실행
+$ roslaunch beginner_tutorials turtlemimic.launch
+$ rostopic pub /turtlesim1/turtle1/cmd_vel geometry_msgs/Twist -r 1 -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, -1.8]'
+
+#디버깅
+$ rqt_graph
+```
+
+## MSG & SRV
+
+```bash
+- MSG
+$ roscd beginner_tutorials
+$ mkdir msg
+$ echo "int64 num" > msg/Num.msg
+
+- SRV
+$ roscd beginner_tutorials
+$ mkdir srv
+$ roscp rospy_tutorials AddTwoInts.srv srv/AddTwoInts.srv
+
+#각 파일에 사이트대로 내용 추가
+package.xml
+CMakeLists.txt
+
+- 사이트 : https://wiki.ros.org/ROS/Tutorials/CreatingMsgAndSrv
+
+#최종 확인
+$ cd ~/catkin_ws
+$ catkin_make
+$ source devel/setup.bash
+
+- MSG
+$ rosmsg show beginner_tutorials/Num
+
+- SRV
+$ rossrv show beginner_tutorials/AddTwoInts
+```
+
+
