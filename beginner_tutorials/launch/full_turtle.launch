@@ -1,0 +1,13 @@
+<launch>
+
+  <!-- 기존 color_turtle.launch를 포함 -->
+
+  <include file="$(find beginner_tutorials)/launch/color_turtle.launch" />
+
+  <!-- 추가로 rqt_graph 실행 -->
+
+  <node pkg="rqt_graph" type="rqt_graph" name="rqt_graph" />
+
+</launch>
+
+<!-- 실행 : roslaunch beginner_tutorials full_turtle.launch-->
