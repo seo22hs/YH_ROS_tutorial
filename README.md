@@ -271,4 +271,37 @@ $ rosmsg show beginner_tutorials/Num
 $ rossrv show beginner_tutorials/AddTwoInts
 ```
 
+## Publisher & Subscriber
+```bash
+$ roscd beginner_tutorials
+
+1. talker
+$ mkdir scripts
+$ cd scripts
+$ wget https://raw.github.com/ros/ros_tutorials/kinetic-devel/rospy_tutorials/001_talker_listener/talker.py
+$ chmod +x talker.py
+
+- Cmakelist에 "talker.py" 추가
+catkin_install_python(PROGRAMS scripts/"talker.py" ~)
+
+2. listener
+$ roscd beginner_tutorials/scripts/
+$ wget https://raw.github.com/ros/ros_tutorials/kinetic-devel/rospy_tutorials/001_talker_listener/listener.py
+$ chmod +x listener.py
+
+- Cmakelist에 "scripts/listener.py" 추가
+catkin_install_python(PROGRAMS scripts/talker.py "scripts/listener.py" ~)
+
+3. 환경 구축
+$ cd ~/catkin_ws
+$ catkin_make
+
+4. 실행
+#터미널 1
+$ roscore
+#터미널 2
+$ rosrun beginner_tutorials talker.py
+#터미널 3
+$ rosrun beginner_tutorials listener.py
+```
 
