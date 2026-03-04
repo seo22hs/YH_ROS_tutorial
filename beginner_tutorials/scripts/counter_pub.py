@@ -33,3 +33,11 @@ if __name__ == '__main__':
     except rospy.ROSInterruptException:
 
         pass
+
+
+# 실행과정
+# cd ~/catkin_ws/src/beginner_tutorials
+# counter_pub.py - 생성
+# chmod +x scripts/counter_pub.py - 실행권한부여
+# 터미널 1 - roscore
+# 터미널 2 - rosrun beginner_tutorials counter_pub.py
