@@ -1,0 +1,16 @@
+<launch>
+
+  <!-- 첫 번째 turtlesim -->
+  <node pkg="turtlesim" type="turtlesim_node" name="sim1" />
+
+  <!-- 두 번째 turtlesim -->
+  <group ns="turtle2">
+    <node pkg="turtlesim" type="turtlesim_node" name="sim2" />
+  </group>
+
+  <!-- 키보드 제어 (기본 turtle1 제어) -->
+  <node pkg="turtlesim" type="turtle_teleop_key"
+        name="teleop"
+        output="screen" />
+
+</launch>
