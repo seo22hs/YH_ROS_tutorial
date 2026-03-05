@@ -25,3 +25,10 @@ if __name__ == '__main__':
 
     #change_pen(0, 255, 0, 5)
     change_pen(255, 255, 0, 5)
+
+
+# 코드와 같은 의미 == rosservice call /turtle1/set_pen 255 0 0 5 0
+
+# Python 코드 → 프로그램(노드) 안에서 서비스 호출
+# rosservice call → 터미널에서 직접 서비스 호출
+# 즉 기능은 같지만 사용 방식이 다릅니다.
