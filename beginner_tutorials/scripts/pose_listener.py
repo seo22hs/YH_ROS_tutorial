@@ -15,3 +15,5 @@ def listener():
 
 if __name__ == '__main__':
     listener()
+
+#commit4 - git commit -m "feat: rosbag play + Subscriber 연동 확인"
