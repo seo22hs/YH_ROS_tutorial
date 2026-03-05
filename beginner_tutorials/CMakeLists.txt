@@ -59,6 +59,7 @@ add_message_files(
 add_service_files(
   FILES
   AddTwoInts.srv
+  StringLength.srv
 #   Service1.srv
 #   Service2.srv
 )
@@ -163,10 +164,15 @@ include_directories(
 
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
-# catkin_install_python(PROGRAMS
-#   scripts/talker.py scripts/listener.py
-#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
+    catkin_install_python(PROGRAMS
+    scripts/talker.py
+    scripts/listener.py
+    scripts/temperature_pub.py
+    scripts/temperature_sub.py
+    scripts/add_two_ints_server.py
+    scripts/add_two_ints_client.py
+    DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+  )
 
 ## Mark executables for installation
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_executables.html
