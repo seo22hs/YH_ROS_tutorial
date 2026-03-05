@@ -295,6 +295,7 @@ catkin_install_python(PROGRAMS scripts/talker.py "scripts/listener.py" ~)
 3. 환경 구축
 $ cd ~/catkin_ws
 $ catkin_make
+*tip : alias cm='cd ~/catkin_ws && catkin_make'
 
 4. 실행
 #터미널 1
@@ -303,5 +304,71 @@ $ roscore
 $ rosrun beginner_tutorials talker.py
 #터미널 3
 $ rosrun beginner_tutorials listener.py
+```
+
+# DAY3
+
+## rosservice & parameter
+```bash
+#rosservice
+1. 서비스 목록 확인
+$ rosservice list -> /turtle1/set_pen
+
+2. 서비스 타입 확인
+$ rosservice type /turtle1/set_pen -> turtlesim/SetPen
+
+3. 서비스 구조 확인
+$ rossrv show turtlesim/SetPen
+
+- 사용 유형 (rosservice / 호출 / 서비스명)
+$ rosservice call /clear
+$ rosservice call /spawn 2 2 0.2 "tultle"
+등등
+
+- 순서대로 확인
+list -> type > rossrv show
+
+#parameter
+$ rosparam list
+
+- set : 값 변경
+$ rosparam set /turtlesim/background_r 150
+$ rosservice call /clear
+
+- get : 값 확인
+$ rosparam get /turtlesim/background_g 
+
+#새 서비스 만들기
+1. srv/name.srv 작성
+2. CMakeLists.txt 수정
+3. catkin_make
+4. rossrv show로 확인 (빌드 결과 검증)
+5. Server 코드 작성 (rospy.Service +callback)
+6. Client 코드 작성 (wait_for_service + ServiceProxy)
+7. rosservice call로 테스트
+```
+## rosbag info & rosbag play
+```bash
+1. 터미널 실행
+#터미널 1
+$ roscore
+#터미널 2
+$ rosrun turtlesim turtlesim_node
+#터미널 3
+$ rosrun turtlesim turtle_teleop_key
+
+2. 출력 확인
+$ rostopic list -v
+
+$ mkdir ~/bagfiles
+$ cd ~/bagfiles
+$ rosbag record -a  *필요한것만 기록 : rosbag record /topic1 /topic2
+
+3. teleop에서 거부기 움직인 후 종료
+
+4.확인
+$ ls -l 로 저장파일명 확인
+$ rosbag info 저장파일명
+$ rosbag play 저장파일명
 ```
 
