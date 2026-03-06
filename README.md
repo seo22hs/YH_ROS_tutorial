@@ -292,9 +292,10 @@ $ chmod +x listener.py
 - Cmakelist에 "scripts/listener.py" 추가
 catkin_install_python(PROGRAMS scripts/talker.py "scripts/listener.py" ~)
 
-3. 환경 구축
+3. *환경 구축*
 $ cd ~/catkin_ws
 $ catkin_make
+$ source devel/setup.bash (활성화)
 *tip : alias cm='cd ~/catkin_ws && catkin_make'
 
 4. 실행
@@ -370,5 +371,37 @@ $ rosbag record -a  *필요한것만 기록 : rosbag record /topic1 /topic2
 $ ls -l 로 저장파일명 확인
 $ rosbag info 저장파일명
 $ rosbag play 저장파일명
+```
+
+# DAY4
+
+## action
+```bash
+1. package.xml - actionlib 추가
+2. CMakeLists.txt - actionlib 추가
+
+3. 빌드
+$ cd ~/catkin_ws
+$ catkin_make
+$ source devel/setup.bash (활성화)
+
+4. action 파일, 폴더 생성
+5. script - Timer_server.py , Timer_client.py 작성 - 권한 부여
+6. 빌드 후 실행
+
+# Debug
+1. 서버 실행 확인
+$ rosnode list or $ rostopic list 
+
+2. goal이 서버로 전달되는지 확인
+$ rostopic echo /timer/goal
+
+3.서버가 피드백을 보내는지 확인
+$ rostopic echo /timer/feedback
+
+4. 결과가 나오는지 확인
+rostopic echo /timer/result
+
++ rqt_graph 확인
 ```
 
