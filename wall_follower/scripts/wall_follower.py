@@ -16,7 +16,7 @@ class WallFollower:
         self.regions = {}
         self.state = 'find_wall'
         self.rate = rospy.Rate(10)
-
+        
     def scan_callback(self, scan):
         # LaserScan 데이터를 5개 영역으로 분할
         self.regions = {
