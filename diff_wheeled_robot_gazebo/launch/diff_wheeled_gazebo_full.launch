@@ -13,8 +13,9 @@
     <arg name="gui" value="$(arg gui)" />
     <arg name="paused" value="$(arg paused)"/>
     <!-- 아래 추가함 -->
-    <!-- <arg name="world_name" value="$(find diff_wheeled_robot_gazebo)/worlds/room.world"/> -->
-    <arg name="world_name" value="$(find diff_wheeled_robot_gazebo)/worlds/corridor.world"/>
+    <!-- <arg name="world_name" value="$(find diff_wheeled_robot_gazebo)/world/test2.world"/> -->
+    <arg name="world_name" value="$(find diff_wheeled_robot_gazebo)/worlds/room.world"/>
+    <!-- <arg name="world_name" value="$(find diff_wheeled_robot_gazebo)/worlds/corridor.world"/> -->
     <arg name="use_sim_time" value="$(arg use_sim_time)"/>
     <arg name="headless" value="$(arg headless)"/>
   </include>
